@@ -8,6 +8,14 @@
 </head>
 
 <body>
+    <nav>
+        <span class="hamburger">☰ メニュー</span>
+        <div class="menu">
+            <a href="index.html">トップ</a>
+            <a href="ACT.html">過去問</a>
+        </div>
+    </nav>
+
     <h1>試験問題一覧</h1>
     <ul>
         <li><a href="problems/exam1.pdf" target="_blank">試験1 問題</a></li>
@@ -15,6 +23,27 @@
         <li><a href="problems/exam2.pdf" target="_blank">試験2 問題</a></li>
         <li><a href="problems/exam2_answers.pdf" target="_blank">試験2 解答</a></li>
     </ul>
+
+    <script>
+        document.querySelector('.hamburger').onclick = () => {
+            document.querySelector('.menu').classList.toggle('open');
+        };
+    </script>
+    <style>
+        .menu {
+            display: none;
+        }
+
+        .menu.open {
+            display: block;
+        }
+    </style>
+    <div class=footer>
+        作成日：2025年9月18日<br>
+        編集日：2025年9月19日<br>
+        作成者：tzug<br>
+    </div>
+</body>
 </body>
 
 </html>
