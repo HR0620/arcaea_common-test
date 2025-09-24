@@ -54,11 +54,21 @@
             });
     </script>
 
+    <div id="navbar"></div>
+
     <script>
-        document.querySelector('.hamburger').onclick = () => {
-            document.querySelector('.menu').classList.toggle('open');
-        };
+        fetch("nav.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+
+                // ここでイベントを仕込む
+                document.querySelector('.hamburger').onclick = () => {
+                    document.querySelector('.menu').classList.toggle('open');
+                };
+            });
     </script>
+
     <h1>実施中の試験</h1>
     <p>現在実施中の試験はございません。</p>
 

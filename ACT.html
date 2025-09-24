@@ -66,11 +66,21 @@
         <li><!--<a href="problems/exam1_answers.pdf" target="_blank">-->解答(試験終了後掲載予定)</li>
     </ul>
 
+    <div id="navbar"></div>
+
     <script>
-        document.querySelector('.hamburger').onclick = () => {
-            document.querySelector('.menu').classList.toggle('open');
-        };
+        fetch("nav.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+
+                // ここでイベントを仕込む
+                document.querySelector('.hamburger').onclick = () => {
+                    document.querySelector('.menu').classList.toggle('open');
+                };
+            });
     </script>
+
     <style>
         .menu {
             display: none;

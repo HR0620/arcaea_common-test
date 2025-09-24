@@ -106,11 +106,21 @@
     </p>
 
 
+    <div id="navbar"></div>
+
     <script>
-        document.querySelector('.hamburger').onclick = () => {
-            document.querySelector('.menu').classList.toggle('open');
-        };
+        fetch("nav.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+
+                // ここでイベントを仕込む
+                document.querySelector('.hamburger').onclick = () => {
+                    document.querySelector('.menu').classList.toggle('open');
+                };
+            });
     </script>
+
     <style>
         .menu {
             display: none;
