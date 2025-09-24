@@ -44,15 +44,15 @@
 </head>
 
 <body>
-    <nav>
-        <span class="hamburger">☰</span>
-        <div class="menu">
-            <a href="index.html">トップページ</a>
-            <a href="notice.html">試験について</a>
-            <a href="result.html">試験結果</a>
-            <a href="ACT.html">過去問題</a>
-        </div>
-    </nav>
+    <div id="navbar"></div>
+
+    <script>
+        fetch("nav.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+            });
+    </script>
 
     <h1>実施要項</h1>
     <p>
