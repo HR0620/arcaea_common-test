@@ -25,16 +25,16 @@
             display: none;
         }
 
+        .menu.open {
+            display: block;
+        }
+
         .hamburger {
             cursor: pointer;
             color: white;
         }
 
         @media (max-width: 600px) {
-            .menu {
-                display: block;
-            }
-
             nav a {
                 display: block;
                 margin: 0.5em 0;
@@ -51,37 +51,22 @@
             .then(res => res.text())
             .then(data => {
                 document.getElementById("navbar").innerHTML = data;
-            });
-    </script>
 
-
-    <script>
-        document.querySelector('.hamburger').onclick = () => {
-            document.querySelector('.menu').classList.toggle('open');
-        };
-    </script>
-    <h2>2026年度</h2>
-    <h3>集計</h3>
-    <p>集計中</p>
-
-    <h3>講評</h3>
-    <p>試験終了後掲載予定</p>
-    <div id="navbar"></div>
-
-    <script>
-        fetch("nav.html")
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById("navbar").innerHTML = data;
-
-                // ここでイベントを仕込む
+                // nav.html が読み込まれたあとにイベントを登録
                 document.querySelector('.hamburger').onclick = () => {
                     document.querySelector('.menu').classList.toggle('open');
                 };
             });
     </script>
 
-    <div class=footer>
+    <h2>2026年度</h2>
+    <h3>集計</h3>
+    <p>集計中</p>
+
+    <h3>講評</h3>
+    <p>試験終了後掲載予定</p>
+
+    <div class="footer">
         作成日：2025年9月22日<br>
         編集日：2025年9月22日<br>
         作成者：tzug<br>
