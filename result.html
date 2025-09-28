@@ -66,11 +66,17 @@
     <h3>講評</h3>
     <p>試験終了後掲載予定</p>
 
-    <div class="footer">
-        作成日：2025年9月22日<br>
-        編集日：2025年9月22日<br>
-        作成者：tzug<br>
-    </div>
+    <!-- フッターを読み込む場所 -->
+    <div id="footer"></div>
+
+    <script>
+        fetch("footer.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            });
+    </script>
+
 </body>
 
 </html>
