@@ -1,0 +1,460 @@
+\RequirePackage{plautopatch}
+\documentclass[paper=a4paper,fontsize=11pt,jafontscale=0.9247,lang=ja]{jlreq}
+\usepackage{bxpapersize}
+\usepackage{fancyhdr}
+\usepackage{fancybox,ascmac}
+\usepackage{url}
+\usepackage[autostyle]{csquotes}
+\usepackage[japanese]{babel}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable, listings}
+\usepackage{listings}
+\usepackage{listings}
+\usepackage{hhline}
+\usepackage{graphicx}
+\usepackage{multicol} % 複数列表示用
+
+% ページ余白の設定
+\geometry{top=25mm, bottom=25mm, left=20mm, right=20mm}
+
+% fancyhdrの設定
+\setlength{\headheight}{18pt}
+\setlength{\headsep}{12pt}
+\setlength{\footskip}{20pt}
+
+%===============================================
+%  マークシート解答欄用マクロ
+%===============================================
+\newcounter{answercat}
+\newcommand{\answerset}[1]{\setcounter{answercat}{#1}}
+\newcommand{\katakana}[1]{\ifcase#1\or ア\or イ\or ウ\or エ\or オ\or カ\or キ\or ク\or ケ\or コ\or サ\or シ\or ス\or セ\or ソ\or タ\or チ\or ツ\or テ\or ト\or ナ\or ニ\or ヌ\or ネ\or ノ\or ハ\or ヒ\or フ\or ヘ\or ホ\or マ\or ミ\or ム\or メ\or モ\or ヤ\or ユ\or ヨ\or ラ\or リ\or ル\or レ\or ロ\or ワ\or ヲ\or ン\fi}
+
+% 自動採番される解答欄（アイウエ...）
+% 使用法: \autoanswer と書くとア、イ、ウ...と進む
+\newcommand{\autoanswer}{%
+  \stepcounter{answercat}%
+  \doublebox{\ \bfseries\katakana{\value{answercat}}\ }%
+}
+
+% 指定した文字の解答欄
+% 使用法: \setanswer{ア}
+\newcommand{\setanswer}[1]{%
+  \doublebox{\ \bfseries #1\ }%
+}
+
+% 解答群のボックス
+% 使用法: \answergroup[列数]{ア}{選択肢の内容}
+% デフォルトは1列
+\newcommand{\answergroup}[3][1]{%
+  \par\vspace{5pt}%
+  \textbf{\doublebox{#2} の解答群}\par%
+  \fbox{%
+    \begin{minipage}{0.95\linewidth}%
+      \vspace{5pt}%
+      \ifnum #1=1
+        #3
+      \else
+        \begin{multicols}{#1}
+        #3
+        \end{multicols}
+      \fi
+      \vspace{5pt}%
+    \end{minipage}%
+  }\par\vspace{10pt}%
+}
+
+% 表形式の解答群タイトル
+% 使用法: \answertable{ア}{表の内容}
+\newcommand{\answertable}[2]{%
+  \par\vspace{5pt}%
+  \textbf{\doublebox{#1} の選択肢}\par%
+  \vspace{5pt}%
+  \begin{center}
+    #2
+  \end{center}
+  \par\vspace{10pt}%
+}
+
+% 四角で囲むだけのコマンド（共通テストの選択肢番号など）
+% fancyboxのdoubleboxを上書きして、ユーザー好みの二重枠にする
+\renewcommand{\doublebox}[1]{%
+  \fbox{\fbox{\bfseries #1}}%
+}
+
+%===============================================
+%  問題階層マクロ (Common Test Style)
+%===============================================
+% 第1問
+\newcommand{\daimon}[1]{%
+  \subsection*{#1}%
+}
+
+% [1], [2]
+\newcommand{\syomon}[1]{%
+  \subsubsection*{#1}%
+}
+
+% (1), (2)
+\newcommand{\komon}[1]{%
+  \textbf{#1}\quad%
+}
+
+
+%===============================================
+%  情報関係基礎/情報I コード記述用スタイル
+%===============================================
+\lstdefinelanguage{DNCL}{
+  morekeywords={表示する, もし, ならば, 実行し, そうでなければ, を, まで, 繰り返す, 繰り返し, 終わり, を, 代入する, 定義する, 返す, 関数},
+  morecomment=[l]{\#},
+  morestring=[b]",
+  sensitive=true
+}
+
+\lstset{
+  language=DNCL,
+  basicstyle={\ttfamily\small},
+  keywordstyle={\bfseries},
+  commentstyle={\itshape},
+  stringstyle={},
+  frame=tlrb,
+  framesep=5pt,
+  numbers=left,
+  numberstyle={\tiny},
+  stepnumber=1,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b
+}
+
+% tcolorboxを使ったコード表示用環境
+\newtcblisting{dnclcode}[1][]{%
+  colback=white,
+  colframe=black,
+  sharp corners,
+  boxrule=0.5pt,
+  listing only,
+  listing options={language=DNCL},
+  #1
+}
+
+%===============================================
+%  ページスタイルの定義
+%===============================================
+
+% 表紙用スタイル（ヘッダー・フッターなし）
+\fancypagestyle{coverpage}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% 注意事項ページ用スタイル
+\fancypagestyle{instructionpage}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \cfoot{\thepage}
+}
+
+% 科目ページ用スタイル（通常）
+\fancypagestyle{exampage}{
+  \fancyhf{}
+  \lhead{\small 令和8年度試験}
+  \chead{\small 【第1回 Arcaea共通テスト】}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \cfoot{\small ―\ \thepage\ ―}
+  \rfoot{\small （次頁へ続く）}
+  \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% 科目の最終ページ用スタイル
+\fancypagestyle{exampageend}{
+  \fancyhf{}
+  \lhead{\small 令和8年度試験}
+  \chead{\small 【第1回 Arcaea共通テスト】}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \cfoot{\small ―\ \thepage\ ―}
+  \rfoot{\small （試験問題は以上です）}
+  \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% 謝辞用スタイル
+\fancypagestyle{acknowledgepage}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+%===============================================
+%  科目開始コマンド
+%===============================================
+% 使い方: \beginsubject{科目名}
+\newcommand{\beginsubject}[1]{%
+  \newpage
+  \pagestyle{exampage}%
+  \begin{center}
+    \vspace*{2em}
+    {\LARGE\textbf{#1}}\\[0.5em]
+    \rule{0.6\textwidth}{0.8pt}
+  \end{center}
+  \vspace{1em}
+}
+
+% 科目終了（最終ページにマーク）
+% 使い方: そのセクションの最後で \finishsubject を呼ぶ
+\newcommand{\finishsubject}{%
+  \thispagestyle{exampageend}%
+}
+
+\begin{document}
+
+%===============================================
+%  表紙
+%===============================================
+\thispagestyle{coverpage}
+\begin{center}
+
+\vspace*{3cm}
+
+% 試験区分
+\fbox{\parbox{0.85\textwidth}{
+  \centering
+  \vspace{0.8em}
+  {\Large 令和8年度}\\[1em]
+  {\Huge\textbf{第1回　Arcaea共通テスト}}\\[1em]
+  \vspace{0.8em}
+}}
+
+\vspace{3cm}
+
+% 試験情報テーブル
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{7cm}|}
+\hline
+\textbf{試験日} & 令和8年（2026年）1月 7日（日） \\
+\hline
+\textbf{解答時間(目安)} & 60分 \\
+\hline
+\textbf{出題科目} & Arcaea・文科・理科 \\
+\hline
+\end{tabular}
+
+\vspace{4cm}
+
+% 注意書き
+\fbox{\parbox{0.75\textwidth}{
+  \centering
+  \vspace{0.5em}
+  \textbf{注意事項}\\[0.5em]
+  試験開始の合図があるまで，この冊子を開いてはいけません。\\[0.3em]
+  \vspace{0.5em}
+}}
+
+\vspace{2cm}
+
+% 主催
+{\large 主催：Arcaea共通テスト製作チーム（$\mathbb{X}$ : @Arcaea\_test）}
+
+\end{center}
+
+%===============================================
+%  注意事項ページ
+%===============================================
+\newpage
+\thispagestyle{instructionpage}
+
+\begin{center}
+{\LARGE\textbf{注　意　事　項}}\\[0.5em]
+\rule{0.7\textwidth}{1pt}
+\end{center}
+
+\vspace{1.5em}
+
+\section*{1　試験全般について}
+\begin{enumerate}
+  \item 解答時間の目安は60分であるが，あくまで目安である．これを超えて回答してもよい．
+  \item 解答は，すべて定められたフォームに記入すること．
+  \item 問題については，すべて Ver 6.11.0 時点の情報に基づいて解答するものとし，それ以降の仕様変更等によらない．
+\end{enumerate}
+
+\section*{2　解答の形式について}
+\begin{enumerate}
+  \item 解答に際しては，必ず各問いにおいて指定された解答形式に従うこと．
+  たとえば，答えが $2.5$ となる場合であっても，$\dfrac{5}{2}$ と記すよう指示されているときは，その指示に従うこと．
+  
+  \item $\dfrac{10}{4}$ や $2\sqrt{8}$ など，約分されていないものや，根号が簡約されていない形での解答は，正解と認められない．
+  
+  \item 分数型での解答を求められた場合，分数の符号は分子に付けること．
+  
+  \item 小数型での解答を求められた場合，指定された桁数の一つ下の桁を四捨五入して答えること．
+  たとえば，$\fbox{キ}.\fbox{ク}\fbox{ケ}$ に $2.495$ を解答する場合は，$2.50$ と記入すること．
+  
+  \item 問題文中の二重四角で示された \doublebox{ナ} などの欄には，選択肢の中から最も適切なものを一つ選んで答えること．
+\end{enumerate}
+
+\section*{3　禁止事項}
+\begin{enumerate}
+  \item 解答の作成にあたり，生成AIを使用してはならない．
+  
+  \item 解答に直接結びつく行為を目的としない範囲に限り，用語や背景事項の確認のための検索エンジンの使用を認める．
+\end{enumerate}
+
+\section*{4　その他}
+\begin{enumerate}
+  \item 試験終了後における，本試験の感想や雰囲気等についての発信を妨げるものではない．広く歓迎する．
+\end{enumerate}
+
+\vfill
+\begin{center}
+\rule{0.5\textwidth}{0.4pt}\\[0.5em]
+\end{center}
+
+%===============================================
+%  Arcaea（科目開始例）
+%===============================================
+\beginsubject{Arcaea}
+\rhead{Arcaea}
+% ここに問題を記入
+\daimon{第1問}
+\answerset{0}% カウンタをリセット（アから開始）
+\begin{enumerate}[label=(\arabic*)]
+\item 次のうち，Arcaeaの登場人物としてふさわしくないものは\doublebox{a}である(コラボキャラを含む)．
+    \answergroup[2]{a}{%
+    \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, itemsep=0pt, style=multiline, labelsep=0.5em]
+    \item 光
+    \item 紅
+    \item マヤ
+    \item サヤ
+    \item 天下茶屋
+    \end{enumerate}
+    }
+
+\item 次のうち，同じ楽曲名が複数存在するものは\doublebox{b}である(コラボ楽曲を含む)．
+    \answergroup[2]{b}{%
+    \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, itemsep=0pt, style=multiline, labelsep=0.5em]
+    \item Quon
+    \item TEmPTaTiON
+    \item GROLY : ROAD
+    \item Jingle
+    \end{enumerate}
+    }
+\end{enumerate}
+% 例:
+% \subsection*{第1問}
+% 問題内容...
+
+\vfill
+
+%===============================================
+%  文科
+%===============================================
+\beginsubject{文科}
+\rhead{文科}
+% ここに問題を記入
+
+
+\vfill
+
+%===============================================
+%  理科
+%===============================================
+\beginsubject{理科}
+\rhead{理科}
+% ここに問題を記入
+\daimon{第1問}
+\begin{enumerate}[label=(\arabic*)]
+  \item $7+6=\fbox{ア}\fbox{イ}$である．
+\end{enumerate}
+\daimon{第2問}
+
+    データを効率よく管理する方法の一つとして，ハッシュ表と呼ばれる仕組みが用いられることがある．
+    ハッシュ表では，各データに対応するキーの値から，そのデータを格納する位置を決めるために，ハッシュ関数と呼ばれる関数を用いる．
+    ここでは，正の整数をキーとするデータを扱うこととし，キー $x$ に対するハッシュ関数 $h(x)$ を
+    \[
+    h(x)=x\mod n
+    \]
+    と定める．
+    ここで，$n$ はハッシュ表の大きさを表す正の整数であり，$x\mod n$ は $x$ を $n$ で割った余りを表すものとする．
+    異なるキーであっても，同じ値 $h(x)$ をとることがあり，このような場合を衝突という．
+    以下の各問いに答えよ．
+\begin{enumerate}[label=(\arabic*)]
+
+  \item 自然数をキーとするデータを，ハッシュ表を用いて管理したい．
+  キー$x$のハッシュ関数を$h(x)$と定めたとき,任意のキー$a$と$b$が衝突する条件は\doublebox{ウ}のときである．
+  \answergroup{ウ}{%
+    \begin{enumerate}[label=\textcircled{\scriptsize\arabic*}, itemsep=0pt, style=multiline, labelsep=0.5em]
+    \item $a+bがnの倍数$
+    \item $a-bがnの倍数$
+    \item $nがa+bの倍数$
+    \item $nがa-bの倍数$
+    \end{enumerate}
+    }
+\end{enumerate}
+
+% 表形式の解答欄サンプル（画像の再現）
+\answertable{エ}{
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+     & \textcircled{\scriptsize 1} & \textcircled{\scriptsize 2} & \textcircled{\scriptsize 3} & \textcircled{\scriptsize 4} & \textcircled{\scriptsize 5} & \textcircled{\scriptsize 6} & \textcircled{\scriptsize 7} & \textcircled{\scriptsize 8} & \textcircled{\scriptsize 9} \\
+    \hline
+    ア & 正 & 正 & 正 & 0 & 0 & 0 & 負 & 負 & 負 \\
+    \hline
+    イ & 正 & 0 & 負 & 正 & 0 & 負 & 正 & 0 & 負 \\
+    \hline
+  \end{tabular}
+}
+
+\vfill
+\finishsubject
+
+%===============================================
+%  謝辞
+%===============================================
+\newpage
+\thispagestyle{acknowledgepage}
+
+\begin{center}
+{\LARGE\textbf{謝　辞}}\\[0.5em]
+\rule{0.4\textwidth}{0.8pt}
+\end{center}
+
+\vspace{2em}
+
+本試験の実施に際して，次の方々に深く感謝申し上げます（敬称略・順不同）。
+
+\vspace{1.5em}
+
+\begin{description}
+  \item[全体] \textbf{Arcaea関係者の皆様}\\
+  　Arcaeaというゲームを世に出してくださいました。感謝の念に堪えません。
+
+  \item[全体] \textbf{シュウ酸}（@TPA36497）\\
+  　本試験の問題を作成するにあたり，Arcaeaに収録されている楽曲についての情報をまとめていただきました。深謝の意を表します。
+
+  \item[国語] \textbf{nkap}（@2354\_1423）\\
+  　のっく様のご紹介をいただきました。ありがとうございました。
+
+  \item[国語] \textbf{のっく}（@nakkunarut23247）\\
+  本試験の国語の問題を作成するにあたって，Arcaeaのストーリーに関しての考察を参考にすることを快諾していただきました．厚く御礼申し上げます。
+
+  \item[全体] \textbf{受験者の皆様}\\
+  本日は公私ご多用の中，本試験を受験してくださり，誠にありがとうございました。
+\end{description}
+
+\vfill
+
+\begin{center}
+\rule{0.3\textwidth}{0.4pt}\\[0.8em]
+{\large 第1回 Arcaea共通テスト　終}
+\end{center}
+
+\end{document}
