@@ -1,118 +1,61 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcaea共通テストHP</title>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
+    <title>Arcaea共通テスト</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        nav {
-            background: #333;
-            padding: 0.5em;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 1em;
-            text-decoration: none;
-        }
-
-        .menu {
-            display: none;
-        }
-
-        .hamburger {
-            cursor: pointer;
-            color: white;
-        }
-
-        .footer {
-            border-top: 1px solid #ccc;
-            padding-top: 0.5em;
-            margin-top: 1em;
-            font-size: 0.8em;
-            color: #333;
-        }
-
-
-        @media (max-width: 600px) {
-            .menu {
-                display: block;
-            }
-
-            nav a {
-                display: block;
-                margin: 0.5em 0;
-            }
-        }
-    </style>
+    <!-- KaTeX for Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 </head>
-
 <body>
-    <div id="navbar"></div>
 
-    <script>
-        fetch("nav.html")
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById("navbar").innerHTML = data;
-            });
-    </script>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Arcaea Common Test</div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" data-link="home">Home</a></li>
+                <li><a href="#" data-link="guidelines">注意事項・出題方針</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <script>
-        document.querySelector('.hamburger').onclick = () => {
-            document.querySelector('.menu').classList.toggle('open');
-        };
-    </script>
+    <!-- Main Content Area (SPA Router Target) -->
+    <main id="app">
+        <!-- Content will be injected here by JS -->
+    </main>
 
-    <div id="navbar"></div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-icons">
+                <a href="https://twitter.com/your_twitter" target="_blank" class="icon-link">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>contact@arcaea-test.com</p>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Arcaea Common Test Project
+            </div>
+        </div>
+    </footer>
 
-    <script>
-        fetch("nav.html")
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById("navbar").innerHTML = data;
-
-                // ここでイベントを仕込む
-                document.querySelector('.hamburger').onclick = () => {
-                    document.querySelector('.menu').classList.toggle('open');
-                };
-            });
-    </script>
-
-    <h1>実施中の試験</h1>
-    <p>現在実施中の試験はございません。</p>
-
-    <h1>NEWS</h1>
-    <ul>
-        <li>2025年9月22日：2026年度試験の実施要項を掲載しました。</li>
-        <li>2025年9月18日：ホームページを開設しました。</li>
-    </ul>
-    <h1>Twitter</h1>
-    <style>
-        .menu {
-            display: none;
-        }
-
-        .menu.open {
-            display: block;
-        }
-    </style>
-    <!-- フッターを読み込む場所 -->
-    <div id="footer"></div>
-
-    <script>
-        fetch("footer.html")
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById("footer").innerHTML = data;
-            });
-    </script>
-
+    <!-- JS Modules -->
+    <script type="module" src="js/main.js"></script>
 </body>
-
 </html>
