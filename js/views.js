@@ -1,4 +1,4 @@
-import { content, exams, news, upcoming } from './data.js';
+import { content, exams, news, upcoming, qa } from './data.js';
 
 export class ViewRenderer {
     renderHome() {
@@ -42,7 +42,7 @@ export class ViewRenderer {
 
             <section id="ongoing" class="fade-in">
                 <div class="section-header">
-                    <h2>実施予定の試験</h2>
+                    <h2>実施中の試験</h2>
                     <span class="decoration-line"></span>
                 </div>
                 ${upcomingHTML}
@@ -55,6 +55,21 @@ export class ViewRenderer {
                 </div>
                 <div class="exam-list">
                     ${exams.map(exam => this.renderExamCard(exam)).join('')}
+                </div>
+            </section>
+
+            <section id="qa" class="fade-in">
+                <div class="section-header">
+                    <h2>Q&A</h2>
+                    <span class="decoration-line"></span>
+                </div>
+                <div class="qa-container">
+                    ${(qa || []).map(item => `
+                        <div class="qa-item">
+                            <div class="qa-question">${item.q}</div>
+                            <div class="qa-answer">${item.a}</div>
+                        </div>
+                    `).join('')}
                 </div>
             </section>
         `;
@@ -80,28 +95,31 @@ export class ViewRenderer {
 
                 <div class="exam-results">
                     <h4>受験結果データ</h4>
-                    <table class="result-table">
-                        <thead>
-                            <tr>
-                                <th>受験者数</th>
-                                <th>平均点</th>
-                                <th>標準偏差</th>
-                                <th>最低点</th>
-                                <th>中央値</th>
-                                <th>最高点</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>${exam.stats.takers}名</td>
-                                <td>${exam.stats.average}</td>
-                                <td>${exam.stats.stdDev}</td>
-                                <td>${exam.stats.min}</td>
-                                <td>${exam.stats.median}</td>
-                                <td>${exam.stats.max}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- Explicit Scroll Wrapper -->
+                    <div class="table-scroll-wrapper">
+                        <table class="result-table">
+                            <thead>
+                                <tr>
+                                    <th>受験者数</th>
+                                    <th>平均点</th>
+                                    <th>標準偏差</th>
+                                    <th>最低点</th>
+                                    <th>中央値</th>
+                                    <th>最高点</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${exam.stats.takers}名</td>
+                                    <td>${exam.stats.average}</td>
+                                    <td>${exam.stats.stdDev}</td>
+                                    <td>75</td> <!-- Placeholder for min -->
+                                    <td>75</td> <!-- Placeholder for median -->
+                                    <td>${exam.stats.max}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         `;
