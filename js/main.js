@@ -37,6 +37,16 @@ class App {
         if (this.menuToggle) {
             this.menuToggle.addEventListener('click', () => {
                 this.navLinks.classList.toggle('active');
+                
+                // Toggle Icon
+                const icon = this.menuToggle.querySelector('i');
+                if (this.navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark'); // or fa-times
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
             });
         }
     }
