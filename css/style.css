@@ -411,6 +411,7 @@ section {
     padding: 12px 20px;
     text-align: center;
     border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Explicitly prevent wrapping */
 }
 
 .result-table th {

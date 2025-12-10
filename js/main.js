@@ -29,6 +29,9 @@ class App {
                 
                 // Close mobile menu if open
                 this.navLinks.classList.remove('active');
+                if (this.menuToggle) {
+                    this.menuToggle.classList.remove('open');
+                }
             }
         });
     }
