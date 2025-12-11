@@ -21,6 +21,7 @@ class App {
 
     setupNavigation() {
         document.body.addEventListener('click', (e) => {
+            // Navigation
             const link = e.target.closest('[data-link]');
             if (link) {
                 e.preventDefault();
@@ -32,6 +33,17 @@ class App {
                 if (this.menuToggle) {
                     this.menuToggle.classList.remove('open');
                 }
+            }
+
+            // Accordion (Q&A)
+            const qaBtn = e.target.closest('.qa-question-btn');
+            if (qaBtn) {
+                const item = qaBtn.parentElement;
+                item.classList.toggle('active');
+                
+                // Optional: Close others? (User didn't specify, but "accordion" usually implies one open. 
+                // "Collapsible" allows multiple. I'll stick to collapsible for utility but exclusive looks more premium.
+                // Reverting to simple toggle for now as per "foldable" request.)
             }
         });
     }

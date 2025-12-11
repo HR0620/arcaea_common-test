@@ -66,8 +66,17 @@ export class ViewRenderer {
                 <div class="qa-container">
                     ${(qa || []).map(item => `
                         <div class="qa-item">
-                            <div class="qa-question">${item.q}</div>
-                            <div class="qa-answer">${item.a}</div>
+                            <button class="qa-question-btn">
+                                <span class="qa-q-mark">Q.</span>
+                                <span class="qa-q-text">${item.q}</span>
+                                <span class="qa-toggle-icon"><i class="fa-solid fa-plus"></i></span>
+                            </button>
+                            <div class="qa-answer-wrapper">
+                                <div class="qa-answer">
+                                    <span class="qa-a-mark">A.</span>
+                                    ${item.a}
+                                </div>
+                            </div>
                         </div>
                     `).join('')}
                 </div>
