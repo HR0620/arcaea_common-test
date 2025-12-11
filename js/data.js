@@ -146,6 +146,7 @@ export const exams = [
             answer: "#"
         },
         stats: {
+            statsDate: "集計前",
             takers: "集計後掲載　",
             average: "集計後掲載",
             stdDev: "集計後掲載",
@@ -164,6 +165,7 @@ export const exams = [
             answer: "assets/pdfs/pre-test_01_a.pdf"
         },
         stats: {
+            statsDate: "2025年12月集計",
             takers: 17,
             average: 75,
             stdDev: 14.8,

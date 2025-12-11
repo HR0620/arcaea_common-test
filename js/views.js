@@ -103,7 +103,7 @@ export class ViewRenderer {
                 </div>
 
                 <div class="exam-results">
-                    <h4>集計結果(1ヶ月)</h4>
+                    <h4>集計結果 (${exam.stats.statsDate})</h4>
                     <!-- Explicit Scroll Wrapper -->
                     <div class="table-scroll-wrapper">
                         <table class="result-table">
