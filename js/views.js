@@ -103,7 +103,7 @@ export class ViewRenderer {
                 </div>
 
                 <div class="exam-results">
-                    <h4>受験結果データ</h4>
+                    <h4>集計結果(1ヶ月)</h4>
                     <!-- Explicit Scroll Wrapper -->
                     <div class="table-scroll-wrapper">
                         <table class="result-table">
@@ -122,8 +122,8 @@ export class ViewRenderer {
                                     <td>${exam.stats.takers}名</td>
                                     <td>${exam.stats.average}</td>
                                     <td>${exam.stats.stdDev}</td>
-                                    <td>75</td> <!-- Placeholder for min -->
-                                    <td>75</td> <!-- Placeholder for median -->
+                                    <td>${exam.stats.min}</td>
+                                    <td>${exam.stats.median}</td>
                                     <td>${exam.stats.max}</td>
                                 </tr>
                             </tbody>
