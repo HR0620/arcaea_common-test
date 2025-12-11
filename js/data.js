@@ -57,19 +57,22 @@ export const content = {
     credits: `
         <div class="text-content">
             <h2>クレジット</h2>
+            <div align="center">
+            ※敬称略・順不同
+            </div>
             
             <div class="guideline-block">
                 <h3>実施主体</h3>
                 
                 <div class="policy-section">
                     <h4>主催</h4>
-                    <p>tzug</p>
+                    <div>tzug</div>
                 </div>
 
                 <div class="policy-section">
                     <h4>連絡先</h4>
-                    <p>お問い合わせはtzugのDMまでお願いいたします．<br>
-                    <a href="https://x.com/tzug_c" target="_blank" style="text-decoration:underline;">@tzug_c</a></p>
+                    <p>𝕏(旧Twitter) : @tzug_c<br>
+                    ※お問い合わせはDMにてお願いいたします．</p>
                 </div>
 
                 <div class="policy-section">
@@ -89,6 +92,16 @@ export const content = {
                     <h4>作問協力</h4>
                     <p>ふせん(𝕏 : @ts050514)</p>
                 </div>
+
+                <div class="policy-section">
+                <h4>データ提供</h4>
+                <p>シュウ酸(𝕏 : @TPA36497)</p>
+            </div>
+            <div class="policy-section">
+                <h4>考察提供</h4>
+                <p>のっく(𝕏 : nakkunarut23427)</p>
+                <p>nkap(𝕏 : @2354_1423)</p>
+            </div>
             </div>
 
             <hr class="section-divider">
@@ -125,7 +138,7 @@ export const upcoming = {
 export const exams = [
     {
         id: "exam1",
-        title: "第1回 共通テスト",
+        title: "第1回 Arcaea共通テスト",
         date: "2026年1月3日実施予定",
         description: "",
         links: {
@@ -143,7 +156,7 @@ export const exams = [
     },
     {
         id: "pre1",
-        title: "第1回 運用テスト",
+        title: "第1回 Arcaea共通テスト運用テスト",
         date: "2025年12月7日実施",
         description: "共通テスト本番に向けた試行調査。",
         links: {
@@ -191,7 +204,7 @@ export const qa = [
     },
     {
         q: "途中で解答を修正できますか？",
-        a: "はい，送信前であれば自由に修正できます。設問一覧から戻り，該当箇所を変更してください。"
+        a: "はい，送信前であれば自由に修正できます．設問一覧から戻り，該当箇所を変更してください。"
     },
     {
         q: "成績はどのように確認できますか？",
@@ -199,7 +212,7 @@ export const qa = [
     },
     {
         q: "氏名（識別名）は公開されますか？",
-        a: "原則として公開されません。ただし，高得点者の紹介等で掲載の可能性がある場合には，必ず事前に許可を確認します．"
+        a: "原則として公開されません．ただし，高得点者の紹介等で掲載の可能性がある場合には，必ず事前に許可を確認します．"
     },
     {
         q: "再受験は可能ですか？",
@@ -207,7 +220,7 @@ export const qa = [
     },
     {
         q: "年齢制限はありますか？",
-        a: "特に年齢制限はありません。Arcaeaに興味のある方であればどなたでも受験できます．"
+        a: "特に年齢制限はありません．Arcaeaに興味のある方であればどなたでも受験できます．"
     },
     {
         q: "この試験は実際の大学入試と関係がありますか？",
