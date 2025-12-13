@@ -13,17 +13,22 @@ Arcaeaに関する名称・画像・その他知的財産権は、各権利者�
 ```
 /
 ├── index.html        # エントリーポイント (SPAコンテナ)
-├── css/
-│   └── style.css     # サイト全体のスタイル定義
-├── js/
-│   ├── main.js       # ルーティング・初期化ロジック
-│   ├── views.js      # ページ描画 (レンダリング) ロジック
-│   └── data.js       # サイト内コンテンツ・テキストデータ
-├── assets/
-│   └── pdfs/         # 試験問題・解答PDF (配置場所)
-├── story/          　 # Arcaeaのストーリー集
-├── License          　# ライセンス
-└── README.md      　     # 本ファイル
+├── public/           # 静的リソース
+│   └── assets/       # 画像・PDF等
+├── src/
+│   ├── styles/
+│   │   └── style.css # サイト全体のスタイル定義
+│   └── js/
+│       ├── main.js   # ルーティング・初期化ロジック
+│       ├── views/    # ページ描画 (レンダリング) ロジック
+│       └── data/     # サイト内コンテンツデータ
+│           ├── content.js
+│           ├── exams.js
+│           ├── news.js
+│           └── qa.js
+├── story/            # Arcaeaのストーリー集
+├── License           # ライセンス
+└── README.md         # 本ファイル
 ```
 
 ## 🛠 開発・更新方法
@@ -31,16 +36,16 @@ Arcaeaに関する名称・画像・その他知的財産権は、各権利者�
 本サイトは純粋なHTML/CSS/JS (Vanilla JS) で構築されており、ビルドツールは不要です。
 
 ### コンテンツの更新
-サイト内のテキスト（お知らせ、試験情報、Q&Aなど）はすべて `js/data.js` で管理されています。
-このファイルを編集するだけで、HTMLを直接触ることなく内容を更新できます。
+サイト内のテキスト（お知らせ、試験情報、Q&Aなど）は `src/js/data/` ディレクトリ内の各モジュールで管理されています。
+目的のファイルを編集するだけで、HTMLを直接触ることなく内容を更新できます。
 
-- **お知らせ**: `news` 配列に追加
-- **試験情報**: `exams`, `upcoming` オブジェクトを編集
-- **Q&A**: `qa` 配列を編集
-- **クレジット**: `content.credits` 文字列を編集
+- **お知らせ**: `src/js/data/news.js` の `news` 配列に追加
+- **試験情報**: `src/js/data/exams.js` の `exams`, `upcoming` オブジェクトを編集
+- **Q&A**: `src/js/data/qa.js` の `qa` 配列を編集
+- **クレジット**: `src/js/data/content.js` の `content.credits` 文字列を編集
 
 ### 新しいページの追加
-1. `js/data.js` の `content` オブジェクトに新しいキーとHTMLを追加します。
+1. `src/js/data/content.js` の `content` オブジェクトに新しいキーとHTMLを追加します。
 2. `index.html` のナビゲーション (`nav-links`) に `data-link="キー名"` を持つリンクを追加します。
 
 ## 📄 ライセンス

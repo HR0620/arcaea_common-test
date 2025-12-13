@@ -1,4 +1,4 @@
-import { content, exams, news, upcoming, qa } from './data.js';
+import { content, exams, news, upcoming, qa } from '../data/index.js';
 
 export class ViewRenderer {
     renderHome() {

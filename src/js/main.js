@@ -1,4 +1,4 @@
-import { ViewRenderer } from './views.js';
+import { ViewRenderer } from './views/ViewRenderer.js';
 
 class App {
     constructor() {
