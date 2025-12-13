@@ -3,7 +3,7 @@ import { content, exams, news, upcoming, qa } from './data.js';
 export class ViewRenderer {
     renderHome() {
         // Construct Upcoming Card HTML
-        let upcomingHTML = `<p class="empty-state">現在、実施中の試験はありません。</p>`;
+        let upcomingHTML = `<p class="empty-state">現在，実施中の試験はありません．</p>`;
         if (upcoming && upcoming.exists) {
             upcomingHTML = `
                 <div class="upcoming-card">
@@ -22,7 +22,7 @@ export class ViewRenderer {
         return `
             <section class="hero fade-in">
                 <h1>Arcaea共通テスト</h1>
-                <p>記憶の彼方に、知識を問う。</p>
+                <p>記憶の彼方に，知識を問う．</p>
             </section>
 
             <section id="news" class="fade-in">

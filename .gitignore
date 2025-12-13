@@ -1,2 +1,5 @@
 #testsディレクトリを無視する
 tests/
+
+#programsディレクトリを無視する
+programs/

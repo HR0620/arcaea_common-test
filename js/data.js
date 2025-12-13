@@ -78,7 +78,7 @@ export const content = {
                 <div class="policy-section">
                     <h4>運営方針</h4>
                     <p>
-                        本企画は、Arcaeaという作品への敬意を基盤とした非公式のファン活動です．<br>
+                        本企画は，Arcaeaという作品への敬意を基盤とした非公式のファン活動です．<br>
                         参加者が作品の世界観をより深く楽しみ，新たな発見を得られるような場を提供することを目指しています．
                     </p>
                 </div>
@@ -117,8 +117,8 @@ export const content = {
 
             <div class="guideline-block">
                 <h3>謝辞</h3>
-                <p>本企画の実現にあたり，上記の方々，素晴らしい楽曲と世界を提供してくださったlowiro limited，およびすべてのクリエイターの皆様に深く感謝いたします．<br>
-                そして、本試験を受験してくださる皆様へ．</p>
+                <p>本企画の実現にあたり，素晴らしい楽曲と世界を提供してくださったlowiro limitedおよびすべてのクリエイターの皆様，上記の方々に深く感謝いたします．<br>
+                そして，本試験を受験してくださる皆様へ．</p>
                 <div style="margin-top: 30px; text-align: center; font-family: var(--font-display); font-size: 1.2rem;">
                     Thank you for playing.
                 </div>
@@ -131,7 +131,7 @@ export const content = {
 export const upcoming = {
     exists: true,
     title: "第1回 Arcaea共通テスト",
-    date: "2026年1月3日",
+    date: "2026年1月10日",
     schedule: "実施予定"
 };
 
@@ -139,33 +139,33 @@ export const exams = [
     {
         id: "exam1",
         title: "第1回 Arcaea共通テスト",
-        date: "2026年1月3日実施予定",
+        date: "2026年1月10日実施予定",
         description: "",
         links: {
             question: "#",
             answer: "#"
         },
         stats: {
-            statsDate: "集計前",
-            takers: "集計後掲載　",
-            average: "集計後掲載",
-            stdDev: "集計後掲載",
-            min: "集計後掲載",
-            median: "集計後掲載",
-            max: "集計後掲載"
+            statsDate: "集計後掲載予定",
+            takers: "--",
+            average: "--",
+            stdDev: "--",
+            min: "--",
+            median: "--",
+            max: "--"
         }
     },
     {
         id: "pre1",
         title: "第1回 Arcaea共通テスト運用テスト",
         date: "2025年12月7日実施",
-        description: "共通テスト本番に向けた試行調査。",
+        description: "共通テスト本番に向けた試行調査．",
         links: {
             question: "assets/pdfs/pre-test_01_q.pdf",
-            answer: "assets/pdfs/pre-test_01_a.pdf"
+            answer: "#"
         },
         stats: {
-            statsDate: "2025年12月集計",
+            statsDate: "2025.12.10時点",
             takers: 17,
             average: 75,
             stdDev: 14.8,
@@ -206,7 +206,7 @@ export const qa = [
     },
     {
         q: "途中で解答を修正できますか？",
-        a: "はい，送信前であれば自由に修正できます．設問一覧から戻り，該当箇所を変更してください。"
+        a: "はい，送信前であれば自由に修正できます．設問一覧から戻り，該当箇所を変更してください．"
     },
     {
         q: "成績はどのように確認できますか？",
