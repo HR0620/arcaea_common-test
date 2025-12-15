@@ -1,0 +1,23 @@
+name: Deploy PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy Preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: . # Root directory (since index.html is at root)
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
