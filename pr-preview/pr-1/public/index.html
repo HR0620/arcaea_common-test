@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcaea共通テスト</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../src/styles/style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- KaTeX for Math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Arcaea Common Test</div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" data-link="home">ホーム</a></li>
+                <li><a href="#" data-link="guidelines">注意事項等</a></li>
+                <li><a href="#" data-link="credits">クレジット</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area (SPA Router Target) -->
+    <main id="app">
+        <!-- Content will be injected here by JS -->
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-icons">
+                <a href="https://twitter.com/your_twitter" target="_blank" class="icon-link">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+            </div>
+            <!-- Contact removed (moved to Credits page) -->
+            <div class="footer-links">
+                <a href="#" id="backToTop">トップに戻る</a>
+            </div>
+            <div class="copyright">
+                本サイトは Arcaea の非公式ファン企画であり，lowiro limited とは一切関係ありません．<br>
+                Arcaea に関する名称・画像・その他知的財産は各権利者に帰属します．   <br>
+                本サイトのオリジナル部分（文章・問題文・デザイン等）は，出典を明記したうえで非営利目的に限り自由に引用・共有いただけます．<br>
+                © 2025 tzug — Licensed under CC BY-NC 4.0<br>
+                
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Modules -->
+    <script type="module" src="../src/js/main.js"></script>
+</body>
+</html>
