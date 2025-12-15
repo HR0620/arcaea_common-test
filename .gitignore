@@ -6,3 +6,6 @@ story/
 
 #programsディレクトリを無視する
 programs/
+
+#venvディレクトリを無視する
+.venv/

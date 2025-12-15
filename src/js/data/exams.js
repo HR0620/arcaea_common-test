@@ -31,7 +31,7 @@ export const exams = [
         date: "2025年12月7日実施",
         description: "共通テスト本番に向けた試行調査．",
         links: {
-            question: "public/assets/pdfs/pre-test_01_q.pdf",
+            question: "../../../public/assets/pdfs/pre-test_01_q.pdf",
             answer: "#"
         },
         stats: {
