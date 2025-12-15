@@ -1,5 +1,8 @@
 #testsディレクトリを無視する
 tests/
 
+#storyディレクトリを無視する
+story/
+
 #programsディレクトリを無視する
 programs/
