@@ -1,14 +1,17 @@
 export const upcoming = {
     exists: true,
-    title: "第1回 Arcaea共通テスト",
+    title: "Arcaea共通テスト",
+    number: "第1回",
     date: "2026年1月10日",
-    schedule: "実施予定"
+    schedule: "実施予定",
+    pdfLink: null  // Set to PDF path when available
 };
 
 export const exams = [
     {
         id: "exam1",
-        title: "第1回 Arcaea共通テスト",
+        number: "第1回",
+        title: "Arcaea共通テスト",
         date: "2026年1月10日実施予定",
         description: "",
         links: {
@@ -27,7 +30,8 @@ export const exams = [
     },
     {
         id: "pre1",
-        title: "第1回 Arcaea共通テスト運用テスト",
+        number: "第1回",
+        title: "Arcaea共通テスト運用テスト",
         date: "2025年12月7日実施",
         description: "共通テスト本番に向けた試行調査．",
         links: {

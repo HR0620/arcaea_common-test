@@ -68,6 +68,9 @@ class App {
 
         this.appElement.innerHTML = contentHTML;
         
+        // Update navigation active state
+        this.updateNavActiveState(viewName);
+        
         // Re-render math
         if (window.renderMathInElement) {
             renderMathInElement(this.appElement, {
@@ -80,6 +83,17 @@ class App {
 
         // Scroll to top
         window.scrollTo(0, 0);
+    }
+
+    updateNavActiveState(viewName) {
+        const links = document.querySelectorAll('.nav-links a[data-link]');
+        links.forEach(link => {
+            if (link.getAttribute('data-link') === viewName) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
     }
 }
 

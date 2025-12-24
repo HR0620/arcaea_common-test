@@ -5,14 +5,31 @@ export class ViewRenderer {
         // Construct Upcoming Card HTML
         let upcomingHTML = `<p class="empty-state">現在，実施中の試験はありません．</p>`;
         if (upcoming && upcoming.exists) {
+            // Check if PDF is available
+            const pdfAvailable = upcoming.pdfLink && upcoming.pdfLink !== '#';
+            const linkClass = pdfAvailable ? 'upcoming-link' : 'upcoming-link disabled';
+            const linkHref = pdfAvailable ? upcoming.pdfLink : '#';
+            
             upcomingHTML = `
                 <div class="upcoming-card">
                     <div class="upcoming-content">
                         <span class="upcoming-label">NEXT EXAMINATION</span>
+                        ${upcoming.number ? `<span class="exam-number">${upcoming.number}</span>` : ''}
                         <h3 class="upcoming-title">${upcoming.title}</h3>
                         <div class="upcoming-date-box">
                             <span class="date-main">${upcoming.date}</span>
                             <span class="date-sub">${upcoming.schedule}</span>
+                        </div>
+                        <div class="upcoming-links">
+                            ${pdfAvailable 
+                                ? `<a href="${linkHref}" target="_blank" class="${linkClass}">
+                                    <i class="fa-regular fa-file-pdf"></i> 問題用紙
+                                   </a>`
+                                : `<span class="${linkClass}">
+                                    <i class="fa-regular fa-file-pdf"></i> 問題用紙
+                                   </span>
+                                   <span class="upcoming-link-note">※試験開始時に配布されます</span>`
+                            }
                         </div>
                     </div>
                 </div>
@@ -87,6 +104,7 @@ export class ViewRenderer {
     renderExamCard(exam) {
         return `
             <div class="exam-card">
+                ${exam.number ? `<span class="exam-number">${exam.number}</span>` : ''}
                 <div class="exam-header">
                     <h3>${exam.title}</h3>
                     <span class="exam-date">${exam.date}</span>

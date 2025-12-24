@@ -9,6 +9,16 @@
     --font-display: "Cormorant Garamond", serif;
     --font-sans: "Helvetica Neue", Arial, sans-serif;
     --transition: 0.4s ease;
+
+    /* 8px-based spacing scale for logical, consistent layout */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+    --space-4xl: 128px;
 }
 
 /* Reset */
@@ -123,7 +133,8 @@ h1 { font-family: var(--font-display); }
     transition: width 0.3s;
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
     width: 100%;
 }
 
@@ -172,22 +183,22 @@ h1 { font-family: var(--font-display); }
 
 /* Main Layout */
 #app {
-    padding-top: 110px; 
-    padding-bottom: 80px;
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-3xl);
     max-width: 900px;
     margin: 0 auto;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
     min-height: 80vh;
 }
 
 /* Content */
 section {
-    margin-bottom: 100px;
+    margin-bottom: var(--space-3xl);
 }
 
 .section-header {
-    margin-bottom: 40px;
+    margin-bottom: var(--space-xl);
     display: flex;
     align-items: center;
     gap: 20px;
@@ -209,7 +220,7 @@ section {
 /* Hero */
 .hero {
     text-align: center;
-    padding: 80px 0;
+    padding: var(--space-3xl) 0;
 }
 
 .hero h1 {
@@ -250,7 +261,7 @@ section {
 /* Upcoming Exam Card */
 .upcoming-card {
     background: var(--glass-bg);
-    padding: 50px;
+    padding: var(--space-2xl);
     box-shadow: 0 15px 40px rgba(0,0,0,0.03);
     text-align: center;
     position: relative;
@@ -265,13 +276,52 @@ section {
     font-size: 1rem;
     letter-spacing: 0.3em;
     color: #888;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-md);
     text-transform: uppercase;
 }
 
 .upcoming-title {
     font-size: 2.5rem;
-    margin-bottom: 30px;
+    margin-bottom: var(--space-lg);
+}
+
+/* Upcoming Exam Links */
+.upcoming-links {
+    margin-top: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.upcoming-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    padding: var(--space-sm) var(--space-lg);
+    border: 1px solid var(--text-color);
+    transition: var(--transition);
+}
+
+.upcoming-link:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.upcoming-link.disabled {
+    border-color: #bbb;
+    color: #999;
+    cursor: default;
+    pointer-events: none;
+}
+
+.upcoming-link-note {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
 }
 
 .upcoming-date-box {
@@ -299,17 +349,26 @@ section {
 /* Exam Cards */
 .exam-list {
     display: grid;
-    gap: 50px;
+    gap: var(--space-2xl);
 }
 
 .exam-card {
     background: rgba(255, 255, 255, 0.7);
-    padding: 40px;
+    padding: var(--space-xl);
     border: 1px solid rgba(0,0,0,0.05);
     box-shadow: 0 5px 20px rgba(0,0,0,0.02);
     position: relative;
     max-width: 100%;
     min-width: 0;
+}
+
+/* Exam Number Label */
+.exam-number {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: #999;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-xs);
 }
 
 .exam-card::after {
