@@ -7,8 +7,7 @@ export class ViewRenderer {
         if (upcoming && upcoming.exists) {
             // Check if PDF is available
             const pdfAvailable = upcoming.pdfLink && upcoming.pdfLink !== '#';
-            const linkClass = pdfAvailable ? 'upcoming-link' : 'upcoming-link disabled';
-            const linkHref = pdfAvailable ? upcoming.pdfLink : '#';
+            const formAvailable = upcoming.formLink && upcoming.formLink !== '#';
             
             upcomingHTML = `
                 <div class="upcoming-card">
@@ -20,15 +19,33 @@ export class ViewRenderer {
                             <span class="date-main">${upcoming.date}</span>
                             <span class="date-sub">${upcoming.schedule}</span>
                         </div>
+                        
+                        <!-- Countdown Timer -->
+                        <div class="countdown-wrapper">
+                            <span class="countdown-label">試験開始まで</span>
+                            <div class="countdown-timer" id="countdown-timer">
+                                <!-- Timer will be injected by JS -->
+                            </div>
+                        </div>
+                        
                         <div class="upcoming-links">
                             ${pdfAvailable 
-                                ? `<a href="${linkHref}" target="_blank" class="${linkClass}">
+                                ? `<a href="${upcoming.pdfLink}" target="_blank" class="upcoming-link">
                                     <i class="fa-regular fa-file-pdf"></i> 問題用紙
                                    </a>`
-                                : `<span class="${linkClass}">
+                                : `<span class="upcoming-link disabled">
                                     <i class="fa-regular fa-file-pdf"></i> 問題用紙
                                    </span>
                                    <span class="upcoming-link-note">※試験開始時に配布されます</span>`
+                            }
+                            ${formAvailable 
+                                ? `<a href="${upcoming.formLink}" target="_blank" class="upcoming-link">
+                                    <i class="fa-brands fa-google"></i> 解答はこちら
+                                   </a>`
+                                : `<span class="upcoming-link disabled">
+                                    <i class="fa-brands fa-google"></i> 解答フォーム
+                                   </span>
+                                   <span class="upcoming-link-note">※試験開始時に公開されます</span>`
                             }
                         </div>
                     </div>
@@ -102,6 +119,9 @@ export class ViewRenderer {
     }
 
     renderExamCard(exam) {
+        // Check if form is available
+        const formAvailable = exam.links.form && exam.links.form !== '#';
+        
         return `
             <div class="exam-card">
                 ${exam.number ? `<span class="exam-number">${exam.number}</span>` : ''}
@@ -118,6 +138,11 @@ export class ViewRenderer {
                     <a href="${exam.links.answer}" target="_blank" class="btn-text">
                         <i class="fa-regular fa-file-pdf"></i> 解答
                     </a>
+                    ${formAvailable 
+                        ? `<a href="${exam.links.form}" target="_blank" class="btn-text btn-form">
+                            <i class="fa-brands fa-google"></i> 解答フォーム
+                           </a>`
+                        : ''}
                 </div>
 
                 <div class="exam-results">

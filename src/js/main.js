@@ -1,4 +1,5 @@
 import { ViewRenderer } from './views/ViewRenderer.js';
+import { upcoming } from './data/index.js';
 
 class App {
     constructor() {
@@ -6,6 +7,7 @@ class App {
         this.renderer = new ViewRenderer();
         this.menuToggle = document.getElementById('menuToggle');
         this.navLinks = document.getElementById('navLinks');
+        this.countdownInterval = null;
         
         this.init();
     }
@@ -17,6 +19,7 @@ class App {
         // Event Listeners
         this.setupNavigation();
         this.setupMobileMenu();
+        this.setupThemeToggle();
     }
 
     setupNavigation() {
@@ -40,10 +43,6 @@ class App {
             if (qaBtn) {
                 const item = qaBtn.parentElement;
                 item.classList.toggle('active');
-                
-                // Optional: Close others? (User didn't specify, but "accordion" usually implies one open. 
-                // "Collapsible" allows multiple. I'll stick to collapsible for utility but exclusive looks more premium.
-                // Reverting to simple toggle for now as per "foldable" request.)
             }
         });
     }
@@ -57,7 +56,30 @@ class App {
         }
     }
 
+    setupThemeToggle() {
+        const toggle = document.getElementById('themeToggle');
+        if (!toggle) return;
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        toggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    }
+
     updateView(viewName) {
+        // Clear existing countdown interval
+        if (this.countdownInterval) {
+            clearInterval(this.countdownInterval);
+            this.countdownInterval = null;
+        }
+
         let contentHTML = '';
         
         if (viewName === 'home') {
@@ -70,6 +92,11 @@ class App {
         
         // Update navigation active state
         this.updateNavActiveState(viewName);
+        
+        // Start countdown if on home page
+        if (viewName === 'home') {
+            this.startCountdown();
+        }
         
         // Re-render math
         if (window.renderMathInElement) {
@@ -94,6 +121,59 @@ class App {
                 link.classList.remove('active');
             }
         });
+    }
+
+    startCountdown() {
+        const countdownElement = document.getElementById('countdown-timer');
+        if (!countdownElement || !upcoming?.examDateTime) return;
+
+        const targetDate = upcoming.examDateTime;
+
+        const updateCountdown = () => {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                countdownElement.innerHTML = `
+                    <span class="countdown-ended">試験開始</span>
+                `;
+                clearInterval(this.countdownInterval);
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `
+                <div class="countdown-unit">
+                    <span class="countdown-value">${String(days).padStart(2, '0')}</span>
+                    <span class="countdown-text">日</span>
+                </div>
+                <span class="countdown-separator">:</span>
+                <div class="countdown-unit">
+                    <span class="countdown-value">${String(hours).padStart(2, '0')}</span>
+                    <span class="countdown-text">時間</span>
+                </div>
+                <span class="countdown-separator">:</span>
+                <div class="countdown-unit">
+                    <span class="countdown-value">${String(minutes).padStart(2, '0')}</span>
+                    <span class="countdown-text">分</span>
+                </div>
+                <span class="countdown-separator">:</span>
+                <div class="countdown-unit">
+                    <span class="countdown-value">${String(seconds).padStart(2, '0')}</span>
+                    <span class="countdown-text">秒</span>
+                </div>
+            `;
+        };
+
+        // Initial update
+        updateCountdown();
+        
+        // Update every second
+        this.countdownInterval = setInterval(updateCountdown, 1000);
     }
 }
 
