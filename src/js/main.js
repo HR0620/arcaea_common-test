@@ -1,5 +1,6 @@
 import { ViewRenderer } from './views/ViewRenderer.js';
 import { upcoming } from './data/index.js';
+import { ParticleIntro } from './intro.js';
 
 class App {
     constructor() {
@@ -13,6 +14,9 @@ class App {
     }
 
     init() {
+        // Start intro animation
+        new ParticleIntro();
+        
         // Initial Render (Home)
         this.updateView('home');
 
